@@ -1,0 +1,64 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #12151a;
+  color: #e8e8e8;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+form,
+#resultado,
+.ancho {
+  background: #1c2128;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+}
+
+.ancho {
+  margin-top: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+input[type=range] {
+  width: 100%;
+}
+
+.check {
+  cursor: pointer;
+}
+
+.grande {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #7ee787;
+}
+
+#titulo {
+  margin-bottom: 0;
+}
+
+#percentil {
+  color: #9aa4b2;
+}

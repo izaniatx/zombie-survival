@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Sobrevivirías al apocalipsis zombi?</title>
+  <link rel="stylesheet" href="/static/estilos.css">
+</head>
+<body>
+  <h1>🧟 ¿Sobrevivirías al apocalipsis zombi?</h1>
+
+  <main>
+    <form id="formulario">
+      <label>Edad: <output id="edad-valor"></output>
+        <input type="range" id="edad" min="15" max="80" value="28">
+      </label>
+      <label>Forma física (1-10): <output id="forma_fisica-valor"></output>
+        <input type="range" id="forma_fisica" min="1" max="10" value="5">
+      </label>
+      <label>Pelis de zombis vistas: <output id="pelis_zombis-valor"></output>
+        <input type="range" id="pelis_zombis" min="0" max="59" value="20">
+      </label>
+      <label>Horas de sueño: <output id="horas_sueno-valor"></output>
+        <input type="range" id="horas_sueno" min="3" max="10" step="0.5" value="7">
+      </label>
+
+      <label class="check"><input type="checkbox" id="sabe_conducir"> Sé conducir</label>
+      <label class="check"><input type="checkbox" id="mascota"> Tengo mascota</label>
+      <label class="check"><input type="checkbox" id="vive_en_campo"> Vivo en el campo</label>
+      <label class="check"><input type="checkbox" id="primeros_auxilios"> Sé primeros auxilios</label>
+    </form>
+
+    <section id="resultado">
+      <h2 id="titulo">...</h2>
+      <p class="grande"><span id="probabilidad">--</span>%</p>
+      <p id="percentil"></p>
+      <canvas id="radar"></canvas>
+    </section>
+  </main>
+
+  <section class="ancho">
+    <h2>¿Qué pesa más en el modelo?</h2>
+    <canvas id="barras"></canvas>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="/static/script.js"></script>
+</body>
+</html>
