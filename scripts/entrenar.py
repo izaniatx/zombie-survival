@@ -9,4 +9,8 @@ X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=0)
 
 modelo = RandomForestRegressor(n_estimators=200, random_state=0).fit(X_tr, y_tr)
 print("R2:", r2_score(y_te, modelo.predict(X_te)))
+
+import os
+os.makedirs("model", exist_ok=True)
+
 joblib.dump((modelo, list(X.columns)), "model/zombies.joblib")

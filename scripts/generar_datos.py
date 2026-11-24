@@ -26,4 +26,8 @@ score = (
     + rng.normal(0, 8, n)       # ruido
 )
 df["prob_supervivencia"] = ((score - score.min()) / (score.max() - score.min()) * 100).round(1)
+
+import os
+os.makedirs("data", exist_ok=True)
+
 df.to_csv("data/zombies.csv", index=False)

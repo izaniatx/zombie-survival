@@ -44,18 +44,39 @@ Sin APIs externas, sin claves, sin cuentas. FastAPI, JavaScript vanilla y Chart.
 
 ## Pruébalo
 
+Necesitas Python 3.10 o superior (recomendado 3.11-3.13) y Git.
+
+**Linux / macOS**
+
 ```bash
 git clone https://github.com/TU_USUARIO/zombie-survival.git
 cd zombie-survival
 
 python3 -m venv .venv
-source .venv/bin/activate        # fish: .venv/bin/activate.fish | Windows: .venv\Scripts\activate
+source .venv/bin/activate        # fish: source .venv/bin/activate.fish
 pip install -r requirements.txt
-mkdir -p data model
 
-python scripts/generar_datos.py && python scripts/entrenar.py
+python scripts/generar_datos.py
+python scripts/entrenar.py
 uvicorn app:app --reload
 ```
+
+**Windows (PowerShell)**
+
+```powershell
+git clone https://github.com/TU_USUARIO/zombie-survival.git
+cd zombie-survival
+
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+python scripts/generar_datos.py
+python scripts/entrenar.py
+uvicorn app:app --reload
+```
+
+> Si PowerShell bloquea la activación del entorno, ejecuta una vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` y vuelve a intentarlo.
 
 Abre **http://127.0.0.1:8000** y a sobrevivir.
 
