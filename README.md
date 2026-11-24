@@ -44,7 +44,9 @@ Sin APIs externas, sin claves, sin cuentas. FastAPI, JavaScript vanilla y Chart.
 
 ## Pruébalo
 
-Necesitas Python 3.10 o superior (recomendado 3.11-3.13) y Git.
+Necesitas Python 3.10 o superior (recomendado 3.11-3.13). En Windows, marca **Add python.exe to PATH** al instalarlo.
+
+Para bajar el código puedes usar Git (`git clone`, como abajo) o, sin Git, el botón **Code > Download ZIP** de GitHub: descomprime, entra en la carpeta `zombie-survival-main` y sigue desde el paso del entorno virtual.
 
 **Linux / macOS**
 
