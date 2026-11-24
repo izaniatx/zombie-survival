@@ -2,6 +2,9 @@ const numericos = ["edad", "forma_fisica", "pelis_zombis", "horas_sueno"];
 const binarios = ["sabe_conducir", "mascota", "vive_en_campo", "primeros_auxilios"];
 const $ = (id) => document.getElementById(id);
 
+Chart.defaults.font.family = "'IBM Plex Mono', monospace";
+Chart.defaults.color = "#8a8672";
+
 // --- Leer el formulario y convertirlo al JSON que espera la API ---
 function leerPersona() {
   const persona = {};
@@ -12,11 +15,17 @@ function leerPersona() {
 
 // --- Título según el resultado ---
 function titulo(prob) {
-  if (prob < 20) return "💀 Carne de cañón";
-  if (prob < 40) return "😰 El primero en caer";
-  if (prob < 60) return "🧍 Superviviente de relleno";
-  if (prob < 80) return "🔫 Veterano del apocalipsis";
-  return "👑 Líder de la resistencia";
+  if (prob < 20) return "Carne de cañón";
+  if (prob < 40) return "El primero en caer";
+  if (prob < 60) return "Superviviente de relleno";
+  if (prob < 80) return "Veterano del apocalipsis";
+  return "Líder de la resistencia";
+}
+
+function colorProb(prob) {
+  if (prob < 30) return "#b3261e";
+  if (prob < 60) return "#d9a21b";
+  return "#7a9a3a";
 }
 
 // --- Stats del radar, todas en escala 0-100 ---
@@ -40,12 +49,25 @@ const radar = new Chart($("radar"), {
   data: {
     labels: ["Forma física", "Edad ideal", "Sueño", "Cultura zombi",
              "Conducción", "Campo", "Primeros auxilios", "Sigilo"],
-    datasets: [{ data: [], backgroundColor: "rgba(126,231,135,0.25)", borderColor: "#7ee787" }],
+    datasets: [{
+      data: [],
+      backgroundColor: "rgba(194, 80, 26, 0.25)",
+      borderColor: "#c2501a",
+      pointBackgroundColor: "#d9a21b",
+    }],
   },
   options: {
-    scales: { r: { min: 0, max: 100, ticks: { display: false },
-                   grid: { color: "#333" }, angleLines: { color: "#333" },
-                   pointLabels: { color: "#e8e8e8" } } },
+    maintainAspectRatio: false,
+    scales: {
+      r: {
+        min: 0,
+        max: 100,
+        ticks: { display: false },
+        grid: { color: "#2a2d22" },
+        angleLines: { color: "#2a2d22" },
+        pointLabels: { color: "#d8d2c0" },
+      },
+    },
     plugins: { legend: { display: false } },
   },
 });
@@ -61,6 +83,7 @@ async function actualizar() {
   if (!r.ok) return;
   const { probabilidad, percentil } = await r.json();
 
+  $("probabilidad").parentElement.style.color = colorProb(probabilidad);
   $("probabilidad").textContent = probabilidad;
   $("percentil").textContent = `Sobrevives más que el ${percentil}% de la gente`;
   $("titulo").textContent = titulo(probabilidad);
@@ -90,14 +113,25 @@ async function cargarImportancias() {
     type: "bar",
     data: {
       labels: datos.map((d) => d.variable),
-      datasets: [{ data: datos.map((d) => d.peso * 100), backgroundColor: "#58a6ff" }],
+      datasets: [{
+        data: datos.map((d) => d.peso * 100),
+        backgroundColor: "#8f3a17",
+      }],
     },
     options: {
       indexAxis: "y",
+      maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { x: { title: { display: true, text: "Importancia (%)", color: "#9aa4b2" },
-                     ticks: { color: "#9aa4b2" } },
-                y: { ticks: { color: "#e8e8e8" } } },
+      scales: {
+        x: {
+          title: { display: true, text: "Importancia (%)" },
+          grid: { color: "#2a2d22" },
+        },
+        y: {
+          ticks: { color: "#d8d2c0" },
+          grid: { display: false },
+        },
+      },
     },
   });
 }
