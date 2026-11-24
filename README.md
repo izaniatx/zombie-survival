@@ -1,10 +1,46 @@
 <div align="center">
 
+<img src="docs/banner-v2.svg" alt="Zombie Survival" width="100%">
+
+<br><br>
+
+![Python](https://img.shields.io/badge/Python-0b0c0a?style=for-the-badge&logo=python&logoColor=d9a21b)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-0b0c0a?style=for-the-badge&logo=scikitlearn&logoColor=c2501a)
+![FastAPI](https://img.shields.io/badge/FastAPI-0b0c0a?style=for-the-badge&logo=fastapi&logoColor=7a9a3a)
+![JavaScript](https://img.shields.io/badge/JavaScript-0b0c0a?style=for-the-badge&logo=javascript&logoColor=d9a21b)
+![Chart.js](https://img.shields.io/badge/Chart.js-0b0c0a?style=for-the-badge&logo=chartdotjs&logoColor=c2501a)
+![pandas](https://img.shields.io/badge/pandas-0b0c0a?style=for-the-badge&logo=pandas&logoColor=d8d2c0)
+
+<br>
+
+<img src="docs/captura.png" alt="Captura de la aplicación" width="90%">
+
+</div>
+
 <br>
 
 <table>
 <tr>
 <td width="33%" valign="top">
+
+### Modelo propio
+Random Forest entrenado desde cero sobre 5.000 supervivientes simulados con reglas inventadas, relaciones no lineales y ruido. R² de 0,85.
+
+</td>
+<td width="33%" valign="top">
+
+### Qué te mata
+No solo te dice tu probabilidad: calcula cuántos puntos ganarías arreglando cada variable de tu perfil por separado.
+
+</td>
+<td width="33%" valign="top">
+
+### Todo en local
+Sin APIs externas, sin claves, sin cuentas. FastAPI, JavaScript vanilla y Chart.js.
+
+</td>
+</tr>
+</table>
 
 ## Pruébalo
 
@@ -42,3 +78,7 @@ Abre **http://127.0.0.1:8000** y a sobrevivir.
 <br>
 
 <div align="center">
+
+Proyecto de portfolio · Desarrollo web + Especialidad en IA
+
+</div>
