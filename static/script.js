@@ -72,6 +72,46 @@ const radar = new Chart($("radar"), {
   },
 });
 
+const nombres = {
+  edad: "Tu edad",
+  forma_fisica: "Tu forma física",
+  sabe_conducir: "No saber conducir",
+  mascota: "Tu mascota",
+  vive_en_campo: "No vivir en el campo",
+  pelis_zombis: "Pocas pelis de zombis",
+  primeros_auxilios: "No saber primeros auxilios",
+  horas_sueno: "Tus horas de sueño",
+};
+
+const letales = new Chart($("letales"), {
+  type: "bar",
+  data: { labels: [], datasets: [{ data: [], backgroundColor: [] }] },
+  options: {
+    indexAxis: "y",
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        min: 0,
+        title: { display: true, text: "Puntos que pierdes" },
+        grid: { color: "#2a2d22" },
+      },
+      y: { ticks: { color: "#d8d2c0" }, grid: { display: false } },
+    },
+  },
+});
+
+function pintarLastres(lastres) {
+  const relevantes = lastres.filter((l) => l.perdida >= 0.5).slice(0, 5);
+  $("sin-lastres").hidden = relevantes.length > 0;
+  letales.data.labels = relevantes.map((l) => nombres[l.variable]);
+  letales.data.datasets[0].data = relevantes.map((l) => l.perdida);
+  letales.data.datasets[0].backgroundColor = relevantes.map((_, i) =>
+    i === 0 ? "#b3261e" : "#8f3a17"
+  );
+  letales.update();
+}
+
 // --- Predecir: llama a la API y actualiza la pantalla ---
 async function actualizar() {
   const persona = leerPersona();
@@ -81,15 +121,17 @@ async function actualizar() {
     body: JSON.stringify(persona),
   });
   if (!r.ok) return;
-  const { probabilidad, percentil } = await r.json();
+  const { probabilidad, percentil, lastres } = await r.json();
 
-  $("probabilidad").parentElement.style.color = colorProb(probabilidad);
   $("probabilidad").textContent = probabilidad;
+  $("probabilidad").parentElement.style.color = colorProb(probabilidad);
   $("percentil").textContent = `Sobrevives más que el ${percentil}% de la gente`;
   $("titulo").textContent = titulo(probabilidad);
 
   radar.data.datasets[0].data = statsRadar(persona);
   radar.update();
+
+  pintarLastres(lastres);
 }
 
 // --- Mostrar el valor de cada slider junto a su etiqueta ---

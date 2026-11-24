@@ -164,3 +164,17 @@ input[type=range] {
 .grafico-barras {
   height: 340px;
 }
+
+.nota {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.8rem;
+  color: var(--apagado);
+}
+
+#sin-lastres {
+  color: var(--musgo);
+}
+
+.grafico-letales {
+  height: 260px;
+}

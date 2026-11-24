@@ -22,15 +22,40 @@ class Persona(BaseModel):
     primeros_auxilios: int = Field(ge=0, le=1)
     horas_sueno: float = Field(ge=3, le=10)
 
+RANGOS = {
+    "edad": range(15, 81),
+    "forma_fisica": range(1, 11),
+    "pelis_zombis": range(0, 60),
+    "horas_sueno": [h / 2 for h in range(6, 21)],  # 3.0, 3.5 ... 10.0
+    "sabe_conducir": [0, 1],
+    "mascota": [0, 1],
+    "vive_en_campo": [0, 1],
+    "primeros_auxilios": [0, 1],
+}
+
+
+def calcular_lastres(base: dict, prob: float):
+    lastres = []
+    for variable, valores in RANGOS.items():
+        candidatas = pd.DataFrame([{**base, variable: v} for v in valores])[columnas]
+        mejor = float(modelo.predict(candidatas).max())
+        lastres.append({
+            "variable": variable,
+            "perdida": round(max(0.0, mejor - prob), 1),
+        })
+    return sorted(lastres, key=lambda x: x["perdida"], reverse=True)
+
 
 @app.post("/predecir")
 def predecir(p: Persona):
-    fila = pd.DataFrame([p.model_dump()])[columnas]
+    base = p.model_dump()
+    fila = pd.DataFrame([base])[columnas]
     prob = float(modelo.predict(fila)[0])
     percentil = float((dataset["prob_supervivencia"] < prob).mean() * 100)
     return {
         "probabilidad": round(prob, 1),
         "percentil": round(percentil, 1),
+        "lastres": calcular_lastres(base, prob),
     }
 
 
@@ -45,6 +70,9 @@ def importancias():
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return FileResponse("static/favicon.svg", media_type="image/svg+xml")
 
 @app.get("/")
 def inicio():
