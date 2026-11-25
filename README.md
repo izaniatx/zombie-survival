@@ -51,7 +51,7 @@ Para bajar el código puedes usar Git (`git clone`, como abajo) o, sin Git, el b
 **Linux / macOS**
 
 ```bash
-git clone https://github.com/TU_USUARIO/zombie-survival.git
+git clone https://github.com/izaniatx/zombie-survival.git
 cd zombie-survival
 
 python3 -m venv .venv
@@ -66,7 +66,7 @@ uvicorn app:app --reload
 **Windows (PowerShell)**
 
 ```powershell
-git clone https://github.com/TU_USUARIO/zombie-survival.git
+git clone https://github.com/izaniatx/zombie-survival.git
 cd zombie-survival
 
 py -m venv .venv
